@@ -19,7 +19,17 @@ connectCloudinary();
 
 //middleware
 app.use(express.json());
-app.use(cors());
+const allowedOrigins = [
+  "https://e-commerce-admin-delta-plum.vercel.app",
+  "https://e-commerce-frontend-lac-theta.vercel.app/collection",
+];
+app.use(
+  cors({
+    origin: allowedOrigins,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    credentials: true, // Include if you're sending cookies
+  })
+);
 
 app.use("/api/user", userRouter);
 app.use("/api/product", productRouter);
